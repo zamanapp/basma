@@ -67,5 +67,4 @@ jobs:
             @semantic-release/git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Swap for secrets.NPM_GLOBAL_TOKEN if you wire the org secret to this repo.
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_GLOBAL_TOKEN }}

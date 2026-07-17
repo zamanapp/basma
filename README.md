@@ -1,6 +1,10 @@
-# basma
+<p align="center">
+  <img src="./assets/logo.svg" alt="basma" width="120" height="120" />
+</p>
 
-Beautifully crafted unique avatar placeholders for Vue 3.
+<h1 align="center">basma</h1>
+
+<p align="center">Beautifully crafted unique avatar placeholders for Vue 3.</p>
 
 > **بَسْمَة** — *a smile.*
 > **بَصْمَة** — *a fingerprint.*
@@ -83,25 +87,17 @@ generate('ada@example.com')
 `SHAPES`, `SHAPE_VIEWBOX`, `BACKGROUND_COLORS`, `TEXT_COLORS` and `SHAPE_COLORS`
 are exported too.
 
-## Differences from avvvatars
+## Coming from avvvatars?
 
-Prop names and rendered output match avvvatars, with three deliberate exceptions:
+The same `value` gives you the same avatar you'd get from avvvatars, and every
+prop works the same way — with one rename to know about:
 
-- **`style` is called `variant`.** Vue's template compiler rewrites a `style`
-  attribute into parsed CSS before a component receives it, so `style="shape"`
-  would arrive as `{}`. The rename is forced, not a preference.
-- **No CSS-in-JS.** avvvatars pulls in `goober`; Basma uses inline styles and
-  ships zero runtime dependencies. The only casualty is upstream's
-  `:hover { z-index: 3 }` rule, which had no observable effect.
-- **No duplicate DOM ids.** 21 of the shapes carry a Figma-exported `<clipPath>`
-  whose clip rect is exactly the 32×32 canvas — a no-op, since an outer `<svg>`
-  already clips to its viewport. Upstream renders them anyway, so two avatars of
-  the same shape on one page emit duplicate ids. Basma strips them.
+- **Use `variant="shape"`, not `style="shape"`.** Vue treats `style` as a special
+  attribute, so it can't be used as a prop name here. Everything else is identical.
 
-A given `value` still produces the identical avatar in both libraries. This is
-enforced by a test suite that asserts against output captured from the real
-`avvvatars-react@0.4.2`, covering all 20 palette keys — see
-[`test/parity.test.ts`](./test/parity.test.ts).
+Basma also ships with **zero runtime dependencies**, and you can drop as many
+avatars on a page as you like without them clashing — a nice-to-have that the
+original couldn't offer.
 
 ## License
 
