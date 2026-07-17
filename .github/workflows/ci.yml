@@ -4,6 +4,7 @@ permissions:
   contents: write # semantic-release pushes the version commit, tag and changelog
   issues: write # semantic-release comments on released issues/PRs
   pull-requests: write
+  id-token: write # OIDC trusted publishing to npm (no NPM_TOKEN) + provenance
 
 on:
   push:
@@ -21,7 +22,7 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run typecheck
@@ -37,7 +38,7 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
@@ -55,16 +56,20 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version-file: .nvmrc # Node 26 bundles npm 11.17+, which OIDC needs (>= 11.5.1)
           cache: pnpm
+          # Do NOT set registry-url here: it writes an .npmrc that conflicts
+          # with semantic-release's own OIDC auth.
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - name: Release 🚀
         uses: cycjimmy/semantic-release-action@v4
         with:
+          semantic_version: 25 # v25 bundles @semantic-release/npm v13, which does OIDC
           extra_plugins: |
             @semantic-release/changelog
             @semantic-release/git
         env:
+          # No NPM_TOKEN: publishing authenticates via OIDC (id-token: write above).
+          # Requires a trusted publisher configured for @zamanapp/basma on npmjs.com.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_GLOBAL_TOKEN }}
