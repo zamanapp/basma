@@ -1,6 +1,6 @@
 {
   "name": "@zamanapp/basma",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Beautifully crafted unique avatar placeholders for your next Vue project. Ported from avvvatars.",
   "type": "module",
   "main": "./dist/basma.cjs",
