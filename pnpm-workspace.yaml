@@ -1,0 +1,5 @@
+# pnpm 11 reads settings from here, not the "pnpm" field in package.json.
+# esbuild (pulled in by vite/vitest) needs its postinstall to link its
+# platform binary; pnpm blocks dependency build scripts by default.
+allowBuilds:
+  esbuild: true

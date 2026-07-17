@@ -1,0 +1,70 @@
+{
+  "name": "@zamanapp/basma",
+  "version": "0.0.0-development",
+  "description": "Beautifully crafted unique avatar placeholders for your next Vue project. Ported from avvvatars.",
+  "type": "module",
+  "main": "./dist/basma.cjs",
+  "module": "./dist/basma.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/basma.js",
+      "require": "./dist/basma.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "LICENSE.avvvatars",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly -p tsconfig.build.json",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dev": "vite build --watch",
+    "prepublishOnly": "pnpm run build",
+    "release": "semantic-release"
+  },
+  "packageManager": "pnpm@11.13.1",
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^20.10.6",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vitest": "^3.2.7",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.0"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "avatar",
+    "avatars",
+    "placeholder avatars",
+    "random avatar",
+    "avatar generator",
+    "profile picture"
+  ],
+  "author": "Zaman",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zamanapp/basma.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zamanapp/basma/issues"
+  },
+  "homepage": "https://github.com/zamanapp/basma#readme"
+}
